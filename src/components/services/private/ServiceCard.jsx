@@ -3,7 +3,6 @@ import DropdownManage from '@components/modal/DropdownManage'
 import StatusBadge from '@components/StatusBadge'
 
 const ServiceCard = ({ service }) => {
-  console.log('🚀 ~ ServiceCard ~ service:', service)
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -15,9 +14,12 @@ const ServiceCard = ({ service }) => {
       className="flex lg:max-w-[295px] w-full max-w-[350px] aspect-[306/164] relative px-[4px] mb-4 cursor-pointer"
       onClick={() => handleClick()}
     >
-      <div className="relative overflow-hidden  bg-[var(--mui-palette-background-content)] rounded-xl shadow-md p-6 w-full max-w-md">
-        <div className='flex gap-2 items-center rounded-full shadow-none justify-center py-4 absolute top-2 right-1 z-5 w-6 h-6'>
-          <DropdownManage />
+      <div className="overflow-hidden  bg-[var(--mui-palette-background-content)] rounded-xl shadow-md p-6 w-full max-w-md">
+        <div
+          className='flex hover:bg-[var(--mui-palette-background-hover)] w-[20px] h-[20px] mt-2 mr-3 rounded-full shadow-none absolute top-2 right-1 z-5'
+          onClick={(e) => e.stopPropagation()}
+        >
+          <DropdownManage service={service} />
         </div>
 
         <div className='px-1'>
@@ -26,8 +28,8 @@ const ServiceCard = ({ service }) => {
           </p>
 
           <div className="w-full flex flex-row justify-between text-sm">
-            <div className='flex flex-col justify-center gap-3'>
-              <p className='py-2'>Status:</p>
+            <div className='flex flex-col justify-center gap-3 text-[var(--mui-palette-text-serviceDetailCard)]'>
+              <p>Status:</p>
               <p>Last Checked:</p>
             </div>
             <div className='flex flex-col justify-center gap-3'>

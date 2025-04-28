@@ -1,5 +1,4 @@
 // theme.js
-import { cyan, deepOrange, orange, teal } from '@mui/material/colors'
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
 
 const theme = extendTheme({
@@ -23,7 +22,8 @@ const theme = extendTheme({
         text: {
           primary: '#334155',
           secondary: '#334155',
-          addServiceBtn: '#ffffff'
+          addServiceBtn: '#ffffff',
+          serviceDetailCard: '#4d6666'
         }
       }
     },
@@ -43,7 +43,8 @@ const theme = extendTheme({
         text: {
           primary: '#ffffff',
           secondary: '#ffffff',
-          addServiceBtn: '#000000'
+          addServiceBtn: '#000000',
+          serviceDetailCard: '#faebd7'
         }
       }
     }

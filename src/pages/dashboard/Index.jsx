@@ -3,14 +3,18 @@ import { data } from '@api/mock.data'
 import ShareIcon from '@components/icons/ShareIcon'
 import EmptyDashboard from './EmptyDashboard'
 import ServiceDashboard from './ServiceDashboard'
+import CreateService from '@components/modal/CreateService'
 
 const Index = () => {
   const [services, setServices] = useState(data.props)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const isEmptyService = services.length === 0
 
   const handleDelete = (uuid) => {
     setServices(prev => prev.filter(service => service.uuid !== uuid))
   }
+
+  const handleModalClose = () => setIsModalOpen(false)
 
   return (
     <div className="pt-[90px]">
@@ -20,14 +24,22 @@ const Index = () => {
 
           <div className='flex items-center justify-center mb-8 md:mb-10 gap-3'>
             <div
-              className='font-medium w-[140px] p-3 rounded-3xl cursor-pointer flex items-center justify-center'
+              className='relative font-medium w-[140px] p-3 rounded-3xl cursor-pointer flex items-center justify-center'
               style={{
                 backgroundColor: 'var(--mui-palette-background-addServiceBtn)',
                 color: 'var(--mui-palette-text-addServiceBtn)'
               }}
+              onClick={() => setIsModalOpen(true)}
             >
               <span>Add service</span>
             </div>
+
+            { isModalOpen && (
+              <CreateService
+                open={isModalOpen}
+                handleClose={handleModalClose}
+              />
+            )}
 
             <a
               href='/status/douglus-services'

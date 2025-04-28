@@ -48,27 +48,27 @@ const DropdownManage = ({ service }) => {
   }, [])
 
   return (
-    <div ref={menuRef} className="relative inline-block text-left cursor-pointer mr-4">
+    <div ref={menuRef} className="relative flex items-center justify-center text-left cursor-pointer">
       <button onClick={handleMenuToggle} className='cursor-pointer'>
-        <DotMenuIcon className="w-[20px] h-[20px]" fill={filledDotIcon()} />
+        <DotMenuIcon className='m-0.5' fill={filledDotIcon()} />
       </button>
 
       {isOpen && (
         <div
-          className="absolute right-0 mt-2 w-32 origin-top-right
-            rounded-xl bg-white ring-1 ring-black/5 z-10 
+          className="absolute mt-4 top-2 right-1 w-32
+            rounded-xl bg-white ring-1 ring-black/5 z-10
             shadow-[0_2px_6px_rgba(100,116,139,0.25),0_-1px_3px_rgba(100,116,139,0.08),-1px_0_3px_rgba(100,116,139,0.08),1px_0_3px_rgba(100,116,139,0.08)]"
         >
           <div className="py-3 px-2.5 text-sm text-gray-800 flex flex-col font-medium">
             <button
-              className="px-4 py-2.5 hover:bg-gray-100 text-left cursor-pointer flex items-center gap-3"
+              className="px-4 py-2.5 hover:bg-gray-100 rounded-3xl text-left cursor-pointer flex items-center gap-3"
               onClick={handleDetailClick}
             >
               <Pencil size={17} />
               <span>Edit</span>
             </button>
             <button
-              className="px-4 py-2.5 hover:bg-gray-100 text-left cursor-pointer flex items-center gap-3"
+              className="px-4 py-2.5 hover:bg-gray-100 rounded-3xl text-left cursor-pointer flex items-center gap-3"
               onClick={handleDeleteClick}
             >
               <Trash size={17} />

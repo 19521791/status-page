@@ -78,7 +78,7 @@ export const data = {
         { 'date': '10-04-2025', 'downTimeCount': 0, 'down_time': null },
         { 'date': '11-04-2025', 'downTimeCount': 0, 'down_time': null }
       ],
-      'status': 'Active',
+      'status': 'active',
       'environment': 'production',
       'uptime_percent': '100.0',
       'last_check': '15 mins ago',
@@ -99,7 +99,7 @@ export const data = {
         { 'date': '10-04-2025', 'downTimeCount': 0, 'down_time': null },
         { 'date': '11-04-2025', 'downTimeCount': 0, 'down_time': null }
       ],
-      'status': 'Active ',
+      'status': 'active',
       'environment': 'production',
       'uptime_percent': '100.0',
       'last_check': '20 mins ago',

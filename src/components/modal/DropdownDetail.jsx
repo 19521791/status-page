@@ -57,14 +57,14 @@ const DropdownDetail = ({ service }) => {
         <div className="absolute right-0 w-32 origin-top-right rounded-xl bg-white shadow-lg ring-1 ring-black/5 z-10">
           <div className="py-4 px-2.5 text-sm text-gray-800 flex flex-col font-medium">
             <button
-              className="px-4 py-2.5 hover:bg-gray-100 text-left cursor-pointer flex items-center gap-3"
+              className="px-4 py-2.5 hover:bg-gray-100 rounded-3xl text-left cursor-pointer flex items-center gap-3"
               onClick={handleDetailClick}
             >
               <ClipboardList size={17} />
               <span>Detail</span>
             </button>
             <button
-              className="px-4 py-2.5 hover:bg-gray-100 text-left cursor-pointer flex items-center gap-3"
+              className="px-4 py-2.5 hover:bg-gray-100 rounded-3xl text-left cursor-pointer flex items-center gap-3"
               onClick={handleDeleteClick}
             >
               <Trash2 size={17} />

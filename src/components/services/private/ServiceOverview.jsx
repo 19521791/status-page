@@ -45,7 +45,7 @@ const ServiceOverview = ({ service }) => {
     return getStatusIcon(status, mode) || getStatusIcon.default
   }
 
-  const getRespTime = (time) => time || '--'
+  const getRespTime = (time) => time || '-----'
 
   const handleClick = () => {
     navigate(`/service-management/${service?.uuid}`)
