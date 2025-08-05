@@ -27,9 +27,7 @@ const ServiceDashboard = ({ data, handleDelete }) => {
       </div>
 
       <div
-        className="rounded-2xl md:mx-4"
-        style={{ backgroundColor: 'var(--mui-palette-background-statusBlock)' }}
-      >
+        className="rounded-2xl md:mx-4 bg-[var(--mui-palette-background-statusBlock)]" >
         {data?.props?.map((service) => (
           <Service key={service.uuid} service={service} onDelete={handleDelete} />
         ))}

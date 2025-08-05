@@ -17,7 +17,8 @@ const theme = extendTheme({
           statusBlock: '#f1f5f9',
           addServiceBtn: '#000000',
           modal: '#F5F5F5',
-          hover: '#ECFEFF'
+          hover: '#ECFEFF',
+          border: '#D1D5DB'
         },
         text: {
           primary: '#334155',
@@ -38,7 +39,8 @@ const theme = extendTheme({
           statusBlock: '#4d6666',
           addServiceBtn: '#F5F5F5',
           modal: '#334155',
-          hover: '#ffffff3d'
+          hover: '#ffffff3d',
+          border: '#34444d'
         },
         text: {
           primary: '#ffffff',

@@ -1,28 +1,19 @@
-import StatusBadge from '@components/StatusBadge'
-
 const ServiceTableRow = ({ service, timeline }) => {
-  const handleStatus = (downtime) => {
-    if (downtime) {
-      return 'Downtime'
-    } else {
-      return 'Uptime'
-    }
-  }
+  const serviceDetailStatus = (downtime) => downtime ? 'Downtime' : 'Uptime'
 
-  const handleRespTime = (time) => time || '-----'
+  const formatResponseTime = (time) => time || '-----'
 
   return (
-    <tr className="text-base">
-      <td className="px-4 py-3 text-center font-medium">{service.uuid}</td>
-      <td className="px-4 py-3 text-center">
-        {handleStatus(timeline.down_time)}
-      </td>
-      <td className='px-4 py-3 text-center'>{service?.uptime_percent}</td>
-      <td className="px-4 py-3 text-center">{handleRespTime(service.resp_time)}</td>
-      <td className="px-4 py-3 text-center">{service.last_check}</td>
-      <td className='px-4 py-3 text-center'>{service?.environment}</td>
-      <td className="px-4 py-3 text-center">{timeline.date}</td>
-    </tr>
+    <div className="grid grid-cols-7 py-5 shadow-xs
+      hover:shadow-md transition-shadow">
+      <div className="text-center">{service.uuid}</div>
+      <div className="text-center">{serviceDetailStatus(timeline.down_time)}</div>
+      <div className="text-center">{service?.uptime_percent}</div>
+      <div className="text-center">{formatResponseTime(service.resp_time)}</div>
+      <div className="text-center">{service.last_check}</div>
+      <div className="text-center">{service?.environment}</div>
+      <div className="text-center">{timeline.date}</div>
+    </div>
   )
 }
 

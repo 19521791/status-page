@@ -1,10 +1,5 @@
 import { useState } from 'react'
-import {
-  Backdrop,
-  Box,
-  Modal,
-  Fade
-} from '@mui/material'
+import { Backdrop, Box, Modal, Fade } from '@mui/material'
 import ExitIcon from '@components/icons/ExitIcon'
 import WarningDeleteIcon from '@components/icons/WarningDeleteIcon'
 import TinyExitIcon from '@components/icons/TinyExitIcon'

@@ -1,10 +1,12 @@
 import { useParams } from 'react-router-dom'
 import { data } from '@api/mock.data'
 import { DEFAULT_SERVICE_NAME } from '@utils/constants'
-import ServiceTable from '@/components/table/ServiceTable'
 import { useState } from 'react'
 import LookupIcon from '@components/icons/LookupIcon'
 import { Funnel, RefreshCcw } from 'lucide-react'
+import CustomTooltip from '@components/CustomTooltip'
+import Footer from '@components/table/Footer'
+import ServiceTableRow from '@components/table/ServiceTableRow'
 
 const ServiceDetail = () => {
   const { uuid } = useParams()
@@ -20,7 +22,7 @@ const ServiceDetail = () => {
             {selectedService?.name || DEFAULT_SERVICE_NAME}
           </h1>
         </div>
-        <div className='bg-white p-8 rounded-2xl mb-10 overflow-x-auto'>
+        <div className='bg-[var(--mui-palette-background-sidebar)] p-8 rounded-2xl mb-10 overflow-x-auto'>
           <div className="mb-5 flex flex-row items-center justify-between">
             <p className="text-base md:text-lg font-semibold leading-tight">Service history</p>
 
@@ -43,21 +45,41 @@ const ServiceDetail = () => {
               </div>
 
               <div className='flex flex-row items-center justify-center gap-2'>
-                <div className='p-2 border border-slate-300 rounded-full'>
-                  <Funnel size={20} />
-                </div>
+                <CustomTooltip title='Filter' placement='top'>
+                  <div className='p-2 border border-slate-300 rounded-full cursor-pointer'>
+                    <Funnel size={20} />
+                  </div>
+                </CustomTooltip>
 
-                <div className='p-2 border border-slate-300 rounded-full'>
-                  <RefreshCcw size={20} />
-                </div>
+                <CustomTooltip title='Refresh' placement='top'>
+                  <div className='p-2 border border-slate-300 rounded-full cursor-pointer'>
+                    <RefreshCcw size={20} />
+                  </div>
+                </CustomTooltip>
               </div>
             </div>
           </div>
-          <ServiceTable service={selectedService} />
+          <div className="w-full border border-[var(--mui-palette-background-border)] rounded-xl overflow-hidden mb-3">
+            <div className="grid grid-cols-7 bg-[var(--mui-palette-background-statusBlock)]
+              text-[var(--mui-palette-text-serviceDetailCard)] text-sm font-medium uppercase">
+              <div className="p-5 text-center rounded-tl-xl">UUID</div>
+              <div className="p-5 text-center">Status</div>
+              <div className="p-5 text-center">Uptime</div>
+              <div className="p-5 text-center">Resp Time</div>
+              <div className="p-5 text-center">Last Checked</div>
+              <div className="p-5 text-center">Environment</div>
+              <div className="p-5 text-center rounded-tr-xl">Date</div>
+            </div>
 
-          <div>
-            <div className='text-sm leading-tight font-medium'>Rows per page</div>
-            <div></div>
+            <div className='bg-[var(--mui-palette-background-content)]'>
+              {selectedService?.health.map((timeline) => (
+                <ServiceTableRow key={timeline.date} service={selectedService} timeline={timeline} />
+              ))}
+            </div>
+          </div>
+
+          <div className='w-full'>
+            <Footer />
           </div>
         </div>
       </div>
