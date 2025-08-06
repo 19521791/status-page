@@ -20,7 +20,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKER_HUB_REPO}")
+                    def dockerImage = docker.build("${DOCKER_HUB_REPO}")
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
-                        docker login -u $DOCKER_USER --password-stdin <<< "$DOCKER_PASS"
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                     '''
                 }
             }
