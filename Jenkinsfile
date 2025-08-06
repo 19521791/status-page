@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-      IMAGE_NAME = "long1100/status_page"
+      IMAGE_NAME = "long1100/see-eye-see-dee"
       IMAGE_TAG = "latest"
       DOCKER_HUB_REPO = "${IMAGE_NAME}:${IMAGE_TAG}"
       VPS_USER = "staging"
