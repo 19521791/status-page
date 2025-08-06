@@ -11,28 +11,9 @@ pipeline {
     }
 
     stages {
-        stage('Prepare Workspace') {
-            steps {
-                cleanWs()
-                sh 'git init'
-            }
-        }
-
         stage('Checkout') {
             steps {
-               checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    extensions: [[
-                        $class: 'CleanBeforeCheckout'
-                    ]],
-                    userRemoteConfigs: [[
-                        credentialsId: 'c1a2d1d1-74f2-4e29-9e5a-bbb0139a2ac3'
-                        url: 'https://github.com/19521791/status-page'
-                    ]]
-                ])
-                sh 'ls -la'
-            }
+               checkout scm
         }
 
         stage('Build Docker Image') {
