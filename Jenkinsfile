@@ -27,8 +27,14 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                  sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-hub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        docker login -u $DOCKER_USER --password-stdin <<< "$DOCKER_PASS"
+                    '''
                 }
             }
         }
@@ -41,14 +47,17 @@ pipeline {
 
         stage('Deploy to VPS') {
             steps {
-                sshagent (credentials: ['vps-ssh-key']) {
+                withCredentials([sshUserPrivateKey(
+                    credentialsId: 'vps-ssh-key',
+                    keyFileVariable: 'SSH_KEY'
+                )]) {
                     sh """
-                      ssh -o StrickHostKeyChecking=no ${VPS_USER}@${VPS_HOST} '
-                        docker pull ${DOCKER_HUB_REPO} &&
-                        docker stop ${CONTAINER_NAME} || true &&
-                        docker rm ${CONTAINER_NAME} || true &&
-                        docker run -d --name ${CONTAINER_NAME} -p 4000:80 ${DOCKER_HUB_REPO}
-                      '
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no ${VPS_USER}@${VPS_HOST} "
+                            docker pull ${DOCKER_HUB_REPO} &&
+                            docker stop ${CONTAINER_NAME} || true &&
+                            docker rm ${CONTAINER_NAME} || true &&
+                            docker run -d --name ${CONTAINER_NAME} -p 4000:80 ${DOCKER_HUB_REPO}
+                        "
                     """
                 }
             }
