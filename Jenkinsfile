@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-      IMAGE_NAME = "long1100:status_page"
+      IMAGE_NAME = "long1100/status_page"
       IMAGE_TAG = "latest"
       DOCKER_HUB_REPO = "${IMAGE_NAME}:${IMAGE_TAG}"
       VPS_USER = "staging"
@@ -11,13 +11,10 @@ pipeline {
     }
 
     stages {
-        stage('Clean') {
-            cleanWs()
-        }
-
-        stage('Verify') {
+        stage('Prepare Workspace') {
             steps {
-                sh 'ls -la'
+                cleanWs()
+                sh 'git init'
             }
         }
 
@@ -26,19 +23,14 @@ pipeline {
                checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/main']],
-                    extensions: [],
+                    extensions: [[
+                        $class: 'CleanBeforeCheckout'
+                    ]],
                     userRemoteConfigs: [[
                         credentialsId: 'c1a2d1d1-74f2-4e29-9e5a-bbb0139a2ac3'
                         url: 'https://github.com/19521791/status-page'
                     ]]
                 ])
-            }
-        }
-
-        stage('Debug Info') {
-            steps {
-                sh 'docker --version'
-                sh 'pwd'
                 sh 'ls -la'
             }
         }
@@ -46,7 +38,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("DOCKER_HUB_REPO")
+                    dockerImage = docker.build("${DOCKER_HUB_REPO}")
                 }
             }
         }
