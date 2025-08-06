@@ -13,7 +13,22 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+               checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    extensions: [],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/19521791/status-page'
+                    ]]
+                ])
+            }
+        }
+
+        stage('Debug Info') {
+            steps {
+                sh 'docker --version'
+                sh 'pwd'
+                sh 'ls -la'
             }
         }
 
@@ -57,7 +72,7 @@ pipeline {
 
     post {
         always {
-            cleanWs{}
+            cleanWs(deleteDirs: true)
         }
     }
 }
