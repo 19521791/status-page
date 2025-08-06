@@ -53,9 +53,14 @@ pipeline {
                 )]) {
                     sh """
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no ${VPS_USER}@${VPS_HOST} "
-                            docker pull ${DOCKER_HUB_REPO} &&
-                            docker stop ${CONTAINER_NAME} || true &&
-                            docker rm ${CONTAINER_NAME} || true &&
+                            docker pull ${DOCKER_HUB_REPO}
+                            
+                            if docker inspect ${CONTAINER_NAME} >/dev/null 2>&1; then
+                                echo 'Container exists, removing...'
+                                docker stop ${CONTAINER_NAME} || true
+                                docker rm ${CONTAINER_NAME} || true
+                            fi
+                            
                             docker run -d --name ${CONTAINER_NAME} -p 4000:80 ${DOCKER_HUB_REPO}
                         "
                     """
