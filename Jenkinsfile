@@ -11,6 +11,16 @@ pipeline {
     }
 
     stages {
+        stage('Clean') {
+            cleanWs()
+        }
+
+        stage('Verify') {
+            steps {
+                sh 'ls -la'
+            }
+        }
+
         stage('Checkout') {
             steps {
                checkout([
@@ -18,6 +28,7 @@ pipeline {
                     branches: [[name: '*/main']],
                     extensions: [],
                     userRemoteConfigs: [[
+                        credentialsId: 'c1a2d1d1-74f2-4e29-9e5a-bbb0139a2ac3'
                         url: 'https://github.com/19521791/status-page'
                     ]]
                 ])
