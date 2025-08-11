@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'work-reactjs' }
 
     environment {
       IMAGE_NAME = "long1100/see-eye-see-dee"
