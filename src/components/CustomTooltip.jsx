@@ -37,7 +37,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
     padding: '6px 10px'
   },
   [`& .${tooltipClasses.arrow}`]: {
-    color: '#262626',
+    color: '#262625',
     '&:before': {
       boxShadow: theme.shadows[1]
     }
