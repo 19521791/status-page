@@ -30,7 +30,7 @@ const CustomTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: '#262626',
+    backgroundColor: '#262622',
     fontSize: 14,
     fontWeight: 500,
     borderRadius: 6,
